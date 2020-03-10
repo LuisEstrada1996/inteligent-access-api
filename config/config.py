@@ -11,8 +11,11 @@ logs = {
 }
 
 db = {
-    "host": "mongodb://dialtesting:S2ewKdGGwX@159.203.175.164:13141/dial-testing",
-	"name" : 'dial-testing'
+    "host": "127.0.0.1",
+    "port": "",
+    "user": "root",
+    "pass": "root",
+	"name" : 'duran'
 }
 
 general = {
