@@ -6,17 +6,19 @@ from libs.mongo import DB
 from bson.json_util import dumps, loads, default
 
 class Respondent(Resource):
-    #method_decorators = [auth] # If you want apply to some method use: {'post': [auth],'put': [auth]}
+    method_decorators = [auth] # If you want apply to some method use: {'post': [auth],'put': [auth]}
     def __init__(self):
         self.log = Logger()
-        self.db = DB().client
+        self.db = DB()
     def get(self, name=None):
         if(name):
             typeGet = "GET ONE"
-            respondents = self.db.respondents.find_one({"firstName":name})
+            respondents = self.db.cur.execute("SELECT * FROM products LIMIT 50")
+            result = self.cur.fetchall()
         else:
             typeGet = "GET ALL"
-            respondents = self.db.respondents.find({})
+            respondents = self.db.cur.execute("SELECT * FROM products LIMIT 50")
+            result = self.cur.fetchall()
 
         if (typeGet=="GET ALL" and respondents.count() > 0) or (typeGet == "GET ONE" and respondents):
             return jsonify(code=200, type=typeGet, data=dumps(respondents))
